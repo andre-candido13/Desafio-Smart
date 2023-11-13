@@ -1,11 +1,24 @@
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
+import createUserRepository from "../respository/users-repository";
+import { UserCreate } from "../interfaces/userCreate";
 
 
 
 
-export async function createUser (name: string, email: string, password:string) {
+async function createUser ({name, email, password}: UserCreate) {
 
-    const hashPassword = await bcrypt.hash(password, 10);
-    await createUserRepository.createUser(name, email, password: hashPassword);
+    const hashPassword: string = await bcrypt.hash(password, 10);
+    await createUserRepository.createUser({name, email, password: hashPassword});
 
 }
+
+
+
+
+
+
+const createUserService = {
+    createUser
+}
+
+export default createUserService
